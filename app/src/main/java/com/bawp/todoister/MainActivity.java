@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Task task = new Task("Todo", Priority.HIGH, Calendar.getInstance().getTime(),
                                 Calendar.getInstance().getTime(),false);
             TaskViewModel.insert(task);
+            TaskViewModel.delete(task);
         });
     }
 
