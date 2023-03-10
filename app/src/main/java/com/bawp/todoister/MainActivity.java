@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                                 Calendar.getInstance().getTime(),false);
             TaskViewModel.insert(task);
             TaskViewModel.delete(task);
-//            comment ikjnijniimykhatija
+//            comment ikjnijniimykhatijahoiljno;h
         });
     }
 
