@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         taskViewModel.getAllTasks().observe(this, tasks ->   {
             for (Task task : tasks) {
-                Log.d(TAG, "onCreate: " + task.getTask());
+                Log.d(TAG, "onCreate: " + task.getTaskId());
             }
         });
 
@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Task task = new Task("Todo", Priority.HIGH, Calendar.getInstance().getTime(),
                                 Calendar.getInstance().getTime(),false);
             TaskViewModel.insert(task);
-            TaskViewModel.delete(task);
-//            comment ikjnijniimykhatijahoiljno;hhiheohohoiwjojgijoihohogi
+
         });
     }
 
