@@ -71,13 +71,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         public void onClick(View view) {
-            Task currTask;
+            Task currTask = taskList.get(getAdapterPosition());
             int id = view.getId();
             if (id == R.id.todo_row_layout) {
-                currTask = taskList.get(getAdapterPosition());
                 onTodoClickListener.onTodoClick(getAdapterPosition(),currTask);
             } else if (id == R.id.todo_radio_button) {
-                onTodoClickListener.onTodoRadioButtonClick(getAdapterPosition());
+                onTodoClickListener.onTodoRadioButtonClick(currTask);
             }
         }
     }

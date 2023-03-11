@@ -100,6 +100,12 @@ public class MainActivity extends AppCompatActivity implements OnTodoClickListen
 
     @Override
     public void onTodoClick(int adapterPosition, Task task) {
-        Log.d("Click", "onTodoClick: "+adapterPosition);
+        Log.d("Click", "onTodoClick: "+task.getTask());
+    }
+
+    @Override
+    public void onTodoRadioButtonClick(Task task) {
+        Log.d("Click", "onRadioButton: "+task.getTask());
+
     }
 }
