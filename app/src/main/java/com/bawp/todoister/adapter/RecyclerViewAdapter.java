@@ -14,15 +14,16 @@ import com.bawp.todoister.model.Task;
 import com.bawp.todoister.util.Utils;
 import com.google.android.material.chip.Chip;
 
-import java.util.Date;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private final List<Task> taskList;
+    private final OnTodoClickListener todoClickListener;
 
-    public RecyclerViewAdapter(List<Task> taskList) {
+    public RecyclerViewAdapter(List<Task> taskList , OnTodoClickListener onTodoClickListener) {
         this.taskList = taskList;
+        this.todoClickListener = onTodoClickListener;
     }
 
     @NonNull
@@ -48,16 +49,36 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return taskList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public AppCompatRadioButton radioButton;
         public AppCompatTextView task;
         public Chip todayChip;
+
+        OnTodoClickListener onTodoClickListener;
+
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
             radioButton = itemView.findViewById(R.id.todo_radio_button);
             task = itemView.findViewById(R.id.todo_row_todo);
             todayChip = itemView.findViewById(R.id.todo_row_chip);
+            this.onTodoClickListener = todoClickListener;
+
+            itemView.setOnClickListener(this);
+            radioButton.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            Task currTask;
+            int id = view.getId();
+            if (id == R.id.todo_row_layout) {
+                currTask = taskList.get(getAdapterPosition());
+                onTodoClickListener.onTodoClick(getAdapterPosition(),currTask);
+            } else if (id == R.id.todo_radio_button) {
+                onTodoClickListener.onTodoRadioButtonClick(getAdapterPosition());
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package com.bawp.todoister;
 
 import android.os.Bundle;
 
+import com.bawp.todoister.adapter.OnTodoClickListener;
 import com.bawp.todoister.adapter.RecyclerViewAdapter;
 import com.bawp.todoister.model.Priority;
 import com.bawp.todoister.model.Task;
@@ -27,7 +28,7 @@ import android.view.MenuItem;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnTodoClickListener {
     private static final String TAG = "ITEM";
     private TaskViewModel taskViewModel;
     private RecyclerView recyclerView;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         .create(TaskViewModel.class);
 
         taskViewModel.getAllTasks().observe(this, tasks ->   {
-           recyclerViewAdapter = new RecyclerViewAdapter(tasks);
+           recyclerViewAdapter = new RecyclerViewAdapter(tasks,this);
            recyclerView.setAdapter(recyclerViewAdapter);
         });
 
@@ -95,5 +96,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTodoClick(int adapterPosition, Task task) {
+        Log.d("Click", "onTodoClick: "+adapterPosition);
     }
 }

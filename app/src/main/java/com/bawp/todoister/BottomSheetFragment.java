@@ -79,7 +79,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
             calendar.clear();
             calendar.set(year,month,dayOfMonth);
             dueDate = calendar.getTime();
-            Log.d("Cal", "onViewCreated: ===> month : "+(month+1)+" , day: "+dayOfMonth);
+//            Log.d("Cal", "onViewCreated: ===> month : "+(month+1)+" , day: "+dayOfMonth);
 
         });
 
@@ -97,6 +97,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.today_chip) {
+            calendar.clear();
             //set date for today
             calendar.add(Calendar.DAY_OF_YEAR,0);
             dueDate = calendar.getTime();
