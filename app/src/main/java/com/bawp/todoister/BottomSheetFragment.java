@@ -2,6 +2,7 @@ package com.bawp.todoister;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Calendar;
+import java.util.Date;
 
-public class BottomSheetFragment extends BottomSheetDialogFragment {
+public class BottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
     private EditText enterTodo;
     private ImageButton calenderButton;
     private ImageButton priorityButton;
@@ -33,6 +35,8 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     private ImageButton saveButton;
     private CalendarView calendarView;
     private Group calenderGroup;
+    private Date dueDate;
+    Calendar calendar = Calendar.getInstance();
 
     public BottomSheetFragment(){
 
@@ -54,8 +58,11 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         priorityRadioGroup = view.findViewById(R.id.radioGroup_priority);
 
         Chip todayChip = view.findViewById(R.id.today_chip);
+        todayChip.setOnClickListener(this);
         Chip tomorrowChip = view.findViewById(R.id.tomorrow_chip);
+        tomorrowChip.setOnClickListener(this);
         Chip nextWeekChip = view.findViewById(R.id.next_week_chip);
+        nextWeekChip.setOnClickListener(this);
 
 
         return view;
@@ -68,13 +75,42 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
             calenderGroup.setVisibility(calenderGroup.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
         });
 
+        calendarView.setOnDateChangeListener((calendarView, year, month, dayOfMonth) -> {
+            calendar.clear();
+            calendar.set(year,month,dayOfMonth);
+            dueDate = calendar.getTime();
+            Log.d("Cal", "onViewCreated: ===> month : "+(month+1)+" , day: "+dayOfMonth);
+
+        });
+
         saveButton.setOnClickListener(view1 -> {
             String task = enterTodo.getText().toString().trim();
-            if (!TextUtils.isEmpty(task)) {
-                Task myTask = new Task(task, Priority.HIGH, Calendar.getInstance().getTime(),Calendar.getInstance().getTime(), false);
+            if (!TextUtils.isEmpty(task) && dueDate != null) {
+                Task myTask = new Task(task, Priority.HIGH, dueDate ,Calendar.getInstance().getTime(), false);
                 TaskViewModel.insert(myTask);
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.today_chip) {
+            //set date for today
+            calendar.add(Calendar.DAY_OF_YEAR,0);
+            dueDate = calendar.getTime();
+            Log.d("TIME", "onClick: "+dueDate.toString());
+        } else if (id == R.id.tomorrow_chip) {
+            //set date for tomrrow
+            calendar.add(Calendar.DAY_OF_YEAR,1);
+            dueDate = calendar.getTime();
+            Log.d("TIME", "onClick: "+dueDate.toString());
+        } else if (id == R.id.next_week_chip) {
+            //set date for next week
+            calendar.add(Calendar.DAY_OF_YEAR,7);
+            dueDate = calendar.getTime();
+            Log.d("TIME", "onClick: "+dueDate.toString());
+        }
     }
 }
