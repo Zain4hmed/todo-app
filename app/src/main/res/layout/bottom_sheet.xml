@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheet"
     style="@style/Animation.Design.BottomSheetDialog"
     android:layout_width="match_parent"
@@ -25,39 +26,39 @@
 
     <ImageButton
         android:id="@+id/priority_todo_button"
-        android:layout_width="77dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="84dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/image_description"
         app:layout_constraintStart_toEndOf="@+id/today_calendar_button"
         app:layout_constraintTop_toBottomOf="@+id/enter_todo_et"
-        app:srcCompat="@drawable/ic_baseline_outlined_flag_24"
-        android:contentDescription="@string/image_description" />
+        app:srcCompat="@drawable/ic_baseline_outlined_flag_24" />
 
     <ImageButton
         android:id="@+id/save_todo_button"
-        android:layout_width="70dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="72dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
+        android:contentDescription="TODO"
         android:scaleX="0.4"
         android:scaleY="0.4"
-        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toEndOf="@+id/priority_todo_button"
         app:layout_constraintTop_toBottomOf="@+id/enter_todo_et"
         app:srcCompat="@drawable/ic_baseline_arrow_circle_up_24" />
 
     <ImageButton
         android:id="@+id/today_calendar_button"
-        android:layout_width="74dp"
-        android:layout_height="48dp"
+        android:layout_width="81dp"
+        android:layout_height="65dp"
         android:layout_marginStart="16dp"
-        android:contentDescription="@string/image_description"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/image_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_todo_et"
         app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
@@ -111,8 +112,8 @@
 
     <CalendarView
         android:id="@+id/calendar_view"
-        android:layout_width="318dp"
-        android:layout_height="296dp"
+        android:layout_width="358dp"
+        android:layout_height="295dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
