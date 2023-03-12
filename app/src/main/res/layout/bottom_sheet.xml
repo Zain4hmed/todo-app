@@ -9,7 +9,8 @@
     android:background="#fff"
     app:behavior_hideable="false"
     app:behavior_peekHeight="@dimen/dimen_32"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:visibility="visible">
 
 
     <EditText
@@ -131,7 +132,8 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priority_todo_button">
+        app:layout_constraintTop_toBottomOf="@+id/priority_todo_button"
+        tools:visibility="gone">
 
         <RadioButton
             android:id="@+id/radioButton_high"
